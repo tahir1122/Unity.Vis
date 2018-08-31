@@ -1,11 +1,9 @@
 using System.IO;
 using System.Collections.Generic;
-
+using UnityEngine;
+using SimpleJSON;
 
 public class DataAdaptor {
-    
-    // TODO: This needs to be more generic, should be able to return a list of any kind of data (int, float, double, string, etc.)
-    // For now, we're returning the raw strings, and letting the developer parse if needed
     public static List<string> ReadCSVFile(string filename)
     {
         List<string> all_data = new List<string>();
@@ -20,5 +18,13 @@ public class DataAdaptor {
             }
         }
         return all_data;
+    }
+
+    // TODO: Same as above
+    public static JSONNode ReadJSONFile(string filename)
+    {
+        // This JSONNode is essentially just a Dictionary. Values can be accessed like json["id"]
+        JSONNode json = JSON.Parse(File.ReadAllText(filename));
+        return json;
     }
 }
